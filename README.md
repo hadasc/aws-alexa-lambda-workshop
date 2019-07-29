@@ -1,26 +1,14 @@
 # Alexa Lambda Workshop
+In this workshop we will build an Amazon Alexa skill, backed by an AWS Lambda backend, using multiple AWS services such as Amazon SES and Amazon Translate.
 
-## Open and Amazon Alexa Developer Account
-Open https://developer.amazon.com and follow the instruction to open a new account.
+![Architecture](screenshots/Architecture.png)
 
-## Create your first skill
-Go to the main skills page and click the ```Create Skill``` button.
+This workshop has 4 parts:
 
-In the ```Create a new skill``` page give your skill a name, set your default language to English (US) and selecy ```Custom``` as the model to add to your skill.
+[Part 1 - Create your first skill](BuildYourFirstSkill.md)
 
-![Create New Skill](screenshots/Screen1.png)
+[Part 2 - Teach your skill to talk]()
 
-On the next page you will be asked to Chose a template - select ```Start from scratch```.
+[Part 3 - Email dictation skill]()
 
-![Choose Template](screenshots/Screen2.png)
-
-### Welcome to your skill Build page!
-This is the main page we will use to build our skill
-
-![Skill Editor](screenshots/Screen3.png)
-
-## Teach your skill to talk
-
-## Email dictation skill
-
-## Add translation capabilities to your skill
+[Part 4 - Add translation capabilities to your skill]()
