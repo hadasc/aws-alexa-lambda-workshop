@@ -1,6 +1,9 @@
 # Part 1 - Build your first skill
+In this part you will setup your Alexa Developer account and build a basic Alexa Skill that can reply to a basic greeting.
 
-## Open and Amazon Alexa Developer Account
+Please follow the next step-by-step instruction to complete this section.
+
+## Open an Amazon Alexa Developer Account
 Open https://developer.amazon.com and follow the instruction to open a new account.
 
 ## Create your first skill
@@ -18,3 +21,5 @@ On the next page you will be asked to Chose a template - select ```Start from sc
 This is the main page we will use to build our skill
 
 ![Skill Editor](screenshots/Screen3.png)
+
+Next - [Part 2]() >>
