@@ -1,4 +1,3 @@
-
 """Simple fact sample app."""
 import boto3
 from botocore.exceptions import ClientError
@@ -21,7 +20,6 @@ from ask_sdk_model import Response
 # TODO: The items below this comment need your attention.
 # =========================================================================================================================================
 SKILL_NAME = "Email Sender"
-#GET_FACT_MESSAGE = "Here's your fact: "
 EMAIL_SENT_MESSAGE = "Your email was sent sucessfully!"
 HELP_MESSAGE = "You can say alexa can you send email for me, or, you can say exit... What can I help you with?"
 HELP_REPROMPT = "What can I help you with?"
@@ -36,36 +34,10 @@ EXCEPTION_MESSAGE = "Sorry. I cannot help you with that."
 
 SENDER = "Alexa <alexaworkshop092019@gmail.com>"
 
-RECIPIENT = "alexaworkshop092019@gmail.com"
-
-# The subject line for the email.
-SUBJECT = "Hi from Alexa"
-
-# The email body for recipients with non-HTML email clients.
-BODY_TEXT = ("Hi from Alexa!")
-            
-# The HTML body of the email.
-BODY_HTML = """<html>
-<head></head>
-<body>
-  <h1>Alexa</h1>
-  <p>Hi from Alexa</p>
-</body>
-</html>
-            """            
-
 # The character encoding for the email.
 CHARSET = "UTF-8"
 
 
-#TODO: remove data
-data = [
-  'Hi',
-  'I hope this mail finds you well',
-  'How are you doing',
-  'Thank you,',
-  'Orit',
-]
 
 # =========================================================================================================================================
 # Editing anything below this line might break your skill.
@@ -90,6 +62,11 @@ class SendNewEmailHandler(AbstractRequestHandler):
         # Try to send the email.
         try:
             logger.info("In send_email")
+            
+            RECIPIENT = handler_input.request_envelope.request.intent["slots"]["Email"]["to"]
+            SUBJECT = handler_input.request_envelope.request.intent["slots"]["Email"]["subject"]
+            BODY_TEXT = handler_input.request_envelope.request.intent["slots"]["Email"]["bodyText"]
+            
             #Provide the contents of the email.
             response = client.send_email(
                 Destination={
@@ -99,10 +76,6 @@ class SendNewEmailHandler(AbstractRequestHandler):
                 },
                 Message={
                     'Body': {
-                        'Html': {
-                            'Charset': CHARSET,
-                            'Data': BODY_HTML,
-                        },
                         'Text': {
                             'Charset': CHARSET,
                             'Data': BODY_TEXT,
@@ -114,9 +87,6 @@ class SendNewEmailHandler(AbstractRequestHandler):
                     },
                 },
                 Source=SENDER,
-                # If you are not using a configuration set, comment or delete the
-                # following line
-                #ConfigurationSetName=CONFIGURATION_SET,
             )
         # Display an error if something goes wrong.	
         except ClientError as e:
@@ -130,13 +100,11 @@ class SendNewEmailHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         logger.info("In SendNewEmailHandler")
 
-       # random_fact = random.choice(data) TODO: Orit: handle sending the email
         self.send_email(handler_input)
-        logger.info("after self.send_email")
         speech = EMAIL_SENT_MESSAGE 
 
         handler_input.response_builder.speak(speech).set_card(
-            SimpleCard(SKILL_NAME, data))
+            SimpleCard(SKILL_NAME, handler_input.request_envelope.request.intent["slots"]["Email"]["bodyText"]))
         return handler_input.response_builder.response
 
 
