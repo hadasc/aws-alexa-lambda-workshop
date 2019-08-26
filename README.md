@@ -1,7 +1,7 @@
 # Alexa Lambda Workshop
-In this workshop we will build an Amazon Alexa skill, backed by an [AWS Lambda](https://aws.amazon.com/lambda/), using multiple AWS services such as Amazon SES and Amazon Translate.
+In this workshop we will build an Amazon Alexa skill, backed by an [AWS Lambda](https://aws.amazon.com/lambda/), using multiple AWS services such as Amazon [SES](https://aws.amazon.com/ses/) and [Amazon Translate](https://aws.amazon.com/translate/).
 
-At the end of the workshop, you will have a voice skill that enables you to dictate short email to Alexa and send then to the recipient, using [Amazon Simple Email Service](https://aws.amazon.com/ses/), in the original language (English) or translate it to one of the 25 languages, supported by [Amazon Translate](https://aws.amazon.com/translate/).
+At the end of the workshop, you will have a voice skill that enables you to dictate a short email to Alexa and send it to the recipient, using [Amazon Simple Email Service](https://aws.amazon.com/ses/), in the original language (English) or translate it to one of the 25 languages, supported by [Amazon Translate](https://aws.amazon.com/translate/).
 
 ![Architecture](screenshots/Architecture.png)
 
