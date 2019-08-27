@@ -23,6 +23,6 @@ Go and add the missing slots and define slot types, prompts and user utterances.
 At the end of the process you should have something like the next screenshot in your Intent Slots list:
 ![Intent Slots](screenshots/Screen5.png)
 
-The ```text``` slot type is a new custom type you will have to create during the process.
+The ```AMAZON.SearchQuery``` slot type is used for open text inputs in our skill.
 
 Ready to move on? [Click here - Part 3 >>](AddTranslation.md)
