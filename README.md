@@ -10,10 +10,10 @@ This workshop has 3 parts:
 [Part 1 - Create your first skill](BuildYourFirstSkill.md)
 - A basic setup of your account on Alexa Developer Console and first skill setup.
 
-[Part 2 - Email dictation skill]()
+[Part 2 - Email dictation skill](EmailDictationSkill.md)
 - Connect your skill to an AWS backend using AWS Lambda.
 
-[Part 3 - Add translation capabilities to your skill]()
+[Part 3 - Add translation capabilities to your skill](AddTranslation.md)
 - Extend your skill to be able to translate your email based on the desired target language.
 
-[Start Part 1](BuildYourFirstSkill.md) >>
+[Start Part 1 >>](BuildYourFirstSkill.md)

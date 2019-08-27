@@ -34,7 +34,7 @@ Intents are actions your skill can perform. Every skill comes with some default 
 
 We will add our first basic intent that should get out name as an input and store it for future use.
 
-Click on ```Add Intent``` and name your custom intent and then click ```Create custom intent```.
+Click on ```Add Intent```, name your custom intent ```GetMyName``` and then click ```Create custom intent```.
 
 #### Sample Utterances
 Alexa needs some sample utterances to trigger a specific intent in your skill. Provide some samples that are likely to be used by your customers to activate this intent. For example you can use ```Let me tell you my name``` or anything similar. You can (and should) have more than one sample utterance to cover different scenarios.
@@ -60,6 +60,6 @@ The Build process will take all your skill definition and create the needed comp
 
 When the build is done, you should be able to test your intents using the ```Utterances Profiler``` button at the top right of your screen.
 
-At this stage, test your name intent and make sure you can have a dialog with the skill that will eventually save your name in the myName slot.
+Test your name intent and make sure you can perform a dialog with the skill, that will eventually save your name in the ```myName``` slot.
 
-Next - [Part 2]() >>
+Ready to move on? [Click here - Part 2 >>](EmailDictationSkill.md)
