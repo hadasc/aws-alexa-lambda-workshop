@@ -19,12 +19,12 @@ from ask_sdk_model import Response
 # =========================================================================================================================================
 # TODO: The items below this comment need your attention.
 # =========================================================================================================================================
-SKILL_NAME = "Email Sender"
-EMAIL_SENT_MESSAGE = "Your email was sent sucessfully!"
-HELP_MESSAGE = "You can say alexa can you send email for me, or, you can say exit... What can I help you with?"
+SKILL_NAME = "SMS Sender"
+EMAIL_SENT_MESSAGE = "Your SMS was sent sucessfully!"
+HELP_MESSAGE = "You can say alexa can you send SMS for me, or, you can say exit... What can I help you with?"
 HELP_REPROMPT = "What can I help you with?"
 STOP_MESSAGE = "Goodbye!"
-FALLBACK_MESSAGE = "I'm sorry, I can't help you with that.  I can send email for you. What can I help you with?"
+FALLBACK_MESSAGE = "I'm sorry, I can't help you with that.  I can send SMS for you. What can I help you with?"
 FALLBACK_REPROMPT = 'What can I help you with?'
 EXCEPTION_MESSAGE = "Sorry. I cannot help you with that."
 
@@ -55,18 +55,17 @@ class SendNewEmailHandler(AbstractRequestHandler):
     """Handler for Skill Launch and SendNewEmail Intent."""
     def can_handle(self, handler_input):
         # type: (HandlerInput) -> bool
-        return (is_request_type("LaunchRequest")(handler_input) or
-                is_intent_name("SendNewEmailIntent")(handler_input))
+        return (is_intent_name("SendSMS")(handler_input))
 
     def send_email(self, handler_input):
         # Try to send the email.
         try:
             logger.info("In send_email")
-            
+
             RECIPIENT = handler_input.request_envelope.request.intent["slots"]["Email"]["to"]
             SUBJECT = handler_input.request_envelope.request.intent["slots"]["Email"]["subject"]
             BODY_TEXT = handler_input.request_envelope.request.intent["slots"]["Email"]["bodyText"]
-            
+
             #Provide the contents of the email.
             response = client.send_email(
                 Destination={
@@ -88,7 +87,7 @@ class SendNewEmailHandler(AbstractRequestHandler):
                 },
                 Source=SENDER,
             )
-        # Display an error if something goes wrong.	
+        # Display an error if something goes wrong.
         except ClientError as e:
             logger.info("Email wasn't sent correctly!")
             logger.error(e.response['Error']['Message'])
@@ -101,7 +100,7 @@ class SendNewEmailHandler(AbstractRequestHandler):
         logger.info("In SendNewEmailHandler")
 
         self.send_email(handler_input)
-        speech = EMAIL_SENT_MESSAGE 
+        speech = EMAIL_SENT_MESSAGE
 
         handler_input.response_builder.speak(speech).set_card(
             SimpleCard(SKILL_NAME, handler_input.request_envelope.request.intent["slots"]["Email"]["bodyText"]))
@@ -123,6 +122,20 @@ class HelpIntentHandler(AbstractRequestHandler):
                 SKILL_NAME, HELP_MESSAGE))
         return handler_input.response_builder.response
 
+class LaunchRequestHandler(AbstractRequestHandler):
+    """Handler for Skill Launch."""
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+        return is_request_type("LaunchRequest")(handler_input)
+
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+        logger.info("In LaunchRequestHandler")
+
+        handler_input.response_builder.speak(HELP_MESSAGE).ask(
+            HELP_REPROMPT).set_card(
+            SimpleCard(SKILL_NAME, HELP_MESSAGE))
+        return handler_input.response_builder.response
 
 class CancelOrStopIntentHandler(AbstractRequestHandler):
     """Single handler for Cancel and Stop Intent."""
@@ -215,6 +228,7 @@ sb.add_request_handler(HelpIntentHandler())
 sb.add_request_handler(CancelOrStopIntentHandler())
 sb.add_request_handler(FallbackIntentHandler())
 sb.add_request_handler(SessionEndedRequestHandler())
+sb.add_request_handler(LaunchRequestHandler())
 
 # Register exception handlers
 sb.add_exception_handler(CatchAllExceptionHandler())

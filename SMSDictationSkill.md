@@ -45,4 +45,15 @@ Save your model (if you did not already) and run your Build.
 
 Test your ```SendSMS``` intent and make sure you can perform a dialog with the skill until you get the Intent confirmation.
 
+## AWS Lambda integration
+If we want any Alexa skill to perform actions, we need to integrate it with some kind of a backend for fulfillment.
+
+### Define Lambda function
+
+#### Setup Alexa Skill as a trigger
+
+### Set Alexa Skill endpoint
+
+## Test it all together
+
 Ready to move on? [Click here - Part 3 >>](AddTranslation.md)
