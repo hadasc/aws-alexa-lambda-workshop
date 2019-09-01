@@ -63,10 +63,41 @@ Click ```Create function```, name your new function, select **Python 3.7** as yo
 
 Next stage is uploading your code (in zip file format) to the console. On the function edit page, navigate to the **Function code** section, change ```Code entry type``` to ```Upload a .zip file```. Browse for your latest version of your ```function.zip``` file and hit ```Save``` on the top right of the page.
 
-When the upload is done, you should see your code and tree structure of your .zip file as in the WYSIWYG editor.
+When the upload is done, you should see your code and tree structure of your .zip file in the WYSIWYG editor.
 To connect your lambda with your new code, you will need to make sure the function Handler and the file name and handler are the same.
 
+#### Add test event
+If you want to test your code without the need to interact with your skill each time you want to initiate a Lambda execution, you will have to define a test event for your function.
+
+Click on **Test** at the top right of the page and define a new test event, using the JSON in [```LambdaTestEvent.json```](./sendSMSSkillLambda/LambdaTestEvent.json) file provided in the code folder. This JSON is an example of the JSON your code will get from your skill, each time the skill will need to trigger the Lambda integration. Make sure you update the JSON with a correct phone number to be used in your test events.
+![Test Event](screenshots/Screen7.png)
+
+After creating the test event, next time when you hit the test button, it will execute your code. Go and run your code now.
+
+You will see the results of your execution at the top of the page. You can look at the result returned by your function execution at the top of the windows and full log at the bottom.
+If all went well, you should see a similar output as the screenshot below:
+![Execution](screenshots/Screen8.png)
+As you can see, although your code was executed successfully, There is an exception that was raised. Check the log output section to find out the reason for this exception.
+
 #### Setup Lambda IAM Role permissions
+As you saw in the previous section, the reason for our exception is insufficient permissions of our Lambda functions to access SNS.
+
+To fix that, we need to provide the role that was created during our function creation, the right permissions to access SNS.
+
+Scroll down to the **Execution role** section and click on the ```View the [ROLE_NAME] role on the IAM console```. On the **Permissions** tab click on the available policy name. This will show you the available permission for this policy. Edit the policy and in the JSON edit screen add the next statement to allow access to the needed SNS actions.
+
+```
+  {
+      "Sid": "Workshop",
+      "Effect": "Allow",
+      "Action": [
+          "sns:Publish",
+          "sns:SetSMSAttributes"
+      ],
+      "Resource": "*"
+  }
+```
+Return to your Lambda function page and test it again. If you followed the steps above, you should get an SMS to the phone number you are using in the test event.
 
 #### Setup Alexa Skill as a trigger
 

@@ -87,6 +87,7 @@ class SendNewSMSHandler(AbstractRequestHandler):
         else:
             logger.info("SMS sent! Message ID:"),
             logger.info(response['MessageId'])
+            return True
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
