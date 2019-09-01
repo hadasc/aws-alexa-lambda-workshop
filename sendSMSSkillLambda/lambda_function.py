@@ -37,7 +37,7 @@ sb = SkillBuilder()
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
-# Create a new SES resource.
+# Create a new SNS resource.
 sns = boto3.client('sns')
 
 # Built-in Intent Handlers
