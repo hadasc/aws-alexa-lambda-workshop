@@ -48,7 +48,15 @@ Test your ```SendSMS``` intent and make sure you can perform a dialog with the s
 ## AWS Lambda integration
 To enable Alexa skills to perform actions, we need to integrate it with some kind of a backend for fulfillment. One of the easiest ways to do so is to integrate your Alexa Skill with AWS Lambda as the backend.
 
-### Define Lambda function
+### Add your Lambda function integration
+This workshop includes the AWS Lambda code needed for your skill to perform SMS sending in the [```sendSMSSkillLambda```](./sendSMSSkillLambda) folder. Navigate to this folder and download the [```function.zip```](./sendSMSSkillLambda/function.zip) and [```lambda_function.py```](./sendSMSSkillLambda/lambda_function.py) files to your local machine.
+
+To make it a bit more interesting, we have omitted some of the  code from the Lambda function so you will have to edit it a bit before you'll be able to use it. Please review the code and replace all ```[YOUR_CODE_IS_HERE]``` sections with the right code.
+
+Before uploading your code, please read and follow the steps in the Lambda function [```README.md```](./sendSMSSkillLambda/README.md) file.
+
+
+#### Setup Lambda IAM Role permissions
 
 #### Setup Alexa Skill as a trigger
 
