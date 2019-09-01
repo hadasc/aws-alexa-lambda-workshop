@@ -40,7 +40,7 @@ Click on ```Add Intent``` name your custom intent ```GetMyName``` and then click
 Alexa needs some sample utterances to trigger a specific intent in your skill. Provide some samples that are likely to be used by your customers to activate this intent. For example you can use ```Let me tell you my name``` or anything similar. You can (and should) have more than one sample utterance to cover different scenarios.
 
 #### Slots
-Slots are variables your skill needs to store data and perform actions. Each intent has it's own slots and they are save for the duration of the session.
+Slots are variables your skill needs to store data and perform actions. Each intent has it's own slots and they are saved for the duration of the session.
 
 For now, we would like to store your name in one of our slots (we will use it later on). Create a new slot with the name ```myName```, click the ```+``` sign to add it and define the slot type as ```AMAZON.FirstName```. A slot type defines how data in the slot is recognized and handled, such as a list of possible values to expect in the slot.
 
