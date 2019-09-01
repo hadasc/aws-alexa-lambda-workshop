@@ -74,7 +74,7 @@ Click on **Test** at the top right of the page and define a new test event, usin
 
 After creating the test event, next time when you hit the test button, it will execute your code. Go and run your code now.
 
-You will see the results of your execution at the top of the page. You can look at the result returned by your function execution at the top of the windows and full log at the bottom.
+You will see the results of your execution at the top of the page. You can look at the result returned by your function execution at the top of the window and full log at the bottom.
 If all went well, you should see a similar output as the screenshot below:
 ![Execution](screenshots/Screen8.png)
 As you can see, although your code was executed successfully, There is an exception that was raised. Check the log output section to find out the reason for this exception.
@@ -100,8 +100,17 @@ Scroll down to the **Execution role** section and click on the ```View the [ROLE
 Return to your Lambda function page and test it again. If you followed the steps above, you should get an SMS to the phone number you are using in the test event.
 
 #### Setup Alexa Skill as a trigger
+Next, we need to allow our Alexa skill to trigger this Lambda function.
 
-### Set Alexa Skill endpoint
+Go back to your Alexa Developer Console build page and scroll down to the **Endpoint** section. This is the page that allows you to define your Skill endpoint(s). Copy ```Your Skill ID``` and go back to the AWS Lambda console. Click on ```Add Trigger```, select ```Alexa Skills Kit```, enable ```Skill ID verification```, paste your Skill ID and click ```Add```.
+![Trigger Setup](screenshots/Screen9.png)
+
+#### Set Alexa Skill endpoint
+Last stage is to define our Lambda function as the endpoint for our Alexa skill. Before going back to the Alexa Developer Console, copy your Lambda function ARN from the top right corner of you Lambda page.
+
+Go back to **Endpoint** definition page in the Alexa Developer Console and paste the Lambda ARN to the ```Default Region``` endpoint.
+
+Save your Endpoint and rebuild your Skill. You are done!
 
 ## Test it all together
 
