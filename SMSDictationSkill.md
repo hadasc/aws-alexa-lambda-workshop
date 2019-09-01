@@ -113,5 +113,12 @@ Go back to **Endpoint** definition page in the Alexa Developer Console and paste
 Save your Endpoint and rebuild your Skill. You are done!
 
 ## Test it all together
+Adding the endpoint, is the last step needed to provide all mandatory Skill building blocks, to allow us to fully test our skill. After doing so, you can access (for the first time) the skill **Test** interact on the Alexa Developer Console.
+
+This interface allows you to test your skill without submitting your skill for testing. It includes a simple interface that will allow you to test your skill with text or voice inputs, as if you are using an Alexa device.
+
+You can type in the text box or use your mic, to speak to your virtual Alexa. You will see and hear Alexa's answers and in case your skill is sending JSON to the endpoint, you should see the JSON input and output coming back from your backend (the Lambda function in our case).
+![Test Skill](screenshots/Screen10.png)
+As the last stage of this section of the workshop, test your skill and make sure everythig work as expected. If you find any problems, fix them and don't forget to save and rebuild your skill.
 
 Ready to move on? [Click here - Part 3 >>](AddTranslation.md)
