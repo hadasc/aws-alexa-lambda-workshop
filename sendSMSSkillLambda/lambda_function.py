@@ -17,7 +17,7 @@ from ask_sdk_model import Response
 
 
 # =========================================================================================================================================
-# TODO: The items below this comment need your attention.
+# Alexa messages
 # =========================================================================================================================================
 SKILL_NAME = "SMS Sender"
 SMS_SENT_MESSAGE = "Your SMS was sent sucessfully!"
@@ -28,19 +28,9 @@ FALLBACK_MESSAGE = "I'm sorry, I can't help you with that.  I can send SMS for y
 FALLBACK_REPROMPT = 'What can I help you with?'
 EXCEPTION_MESSAGE = "Sorry. I cannot help you with that."
 
-# =========================================================================================================================================
-# TODO: Replace this data with your own.  You can find translations of this data at http://github.com/alexa/skill-sample-python-fact/lambda/data
-# =========================================================================================================================================
-
-SENDER = "Alexa <alexaworkshop092019@gmail.com>"
-
-# The character encoding for the SMS.
-CHARSET = "UTF-8"
-
-
 
 # =========================================================================================================================================
-# Editing anything below this line might break your skill.
+# Skill backend implementation:
 # =========================================================================================================================================
 
 sb = SkillBuilder()
