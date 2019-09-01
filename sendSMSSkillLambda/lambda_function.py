@@ -34,7 +34,7 @@ EXCEPTION_MESSAGE = "Sorry. I cannot help you with that."
 
 SENDER = "Alexa <alexaworkshop092019@gmail.com>"
 
-# The character encoding for the email.
+# The character encoding for the SMS.
 CHARSET = "UTF-8"
 
 
@@ -51,8 +51,8 @@ logger.setLevel(logging.DEBUG)
 sns = boto3.client('sns')
 
 # Built-in Intent Handlers
-class SendNewEmailHandler(AbstractRequestHandler):
-    """Handler for Skill Launch and SendNewEmail Intent."""
+class SendNewSMSHandler(AbstractRequestHandler):
+    """Handler for Skill Launch and SendSMS Intent."""
     def can_handle(self, handler_input):
         # type: (HandlerInput) -> bool
         return (is_intent_name("SendSMS")(handler_input))
@@ -221,7 +221,7 @@ class ResponseLogger(AbstractResponseInterceptor):
 
 
 # Register intent handlers
-sb.add_request_handler(SendNewEmailHandler())
+sb.add_request_handler(SendNewSMSHandler())
 sb.add_request_handler(HelpIntentHandler())
 sb.add_request_handler(CancelOrStopIntentHandler())
 sb.add_request_handler(FallbackIntentHandler())
