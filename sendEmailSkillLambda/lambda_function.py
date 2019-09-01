@@ -9,7 +9,7 @@ from ask_sdk_core.skill_builder import SkillBuilder
 from ask_sdk_core.dispatch_components import (
     AbstractRequestHandler, AbstractExceptionHandler,
     AbstractRequestInterceptor, AbstractResponseInterceptor)
-from ask_sdk_core.utils import is_request_type, is_intent_name
+from ask_sdk_core.utils import is_request_type, is_intent_name, get_slot_value
 from ask_sdk_core.handler_input import HandlerInput
 
 from ask_sdk_model.ui import SimpleCard
@@ -20,7 +20,7 @@ from ask_sdk_model import Response
 # TODO: The items below this comment need your attention.
 # =========================================================================================================================================
 SKILL_NAME = "SMS Sender"
-EMAIL_SENT_MESSAGE = "Your SMS was sent sucessfully!"
+SMS_SENT_MESSAGE = "Your SMS was sent sucessfully!"
 HELP_MESSAGE = "You can say alexa can you send SMS for me, or, you can say exit... What can I help you with?"
 HELP_REPROMPT = "What can I help you with?"
 STOP_MESSAGE = "Goodbye!"
@@ -48,7 +48,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 # Create a new SES resource.
-client = boto3.client('ses')
+sns = boto3.client('sns')
 
 # Built-in Intent Handlers
 class SendNewEmailHandler(AbstractRequestHandler):
@@ -57,54 +57,52 @@ class SendNewEmailHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> bool
         return (is_intent_name("SendSMS")(handler_input))
 
-    def send_email(self, handler_input):
-        # Try to send the email.
+    def send_sms(self, handler_input):
+        # Try to send the SMS.
         try:
-            logger.info("In send_email")
+            logger.info("In send_sms")
 
-            RECIPIENT = handler_input.request_envelope.request.intent["slots"]["Email"]["to"]
-            SUBJECT = handler_input.request_envelope.request.intent["slots"]["Email"]["subject"]
-            BODY_TEXT = handler_input.request_envelope.request.intent["slots"]["Email"]["bodyText"]
+            RECIPIENT = get_slot_value(handler_input=handler_input, slot_name="toPhone")
+            BODY_TEXT = get_slot_value(handler_input=handler_input, slot_name="body")
+            FRON_NAME = get_slot_value(handler_input=handler_input, slot_name="myName")
+            TO_NAME = get_slot_value(handler_input=handler_input, slot_name="toName")
 
-            #Provide the contents of the email.
-            response = client.send_email(
-                Destination={
-                    'ToAddresses': [
-                        RECIPIENT,
-                    ],
-                },
-                Message={
-                    'Body': {
-                        'Text': {
-                            'Charset': CHARSET,
-                            'Data': BODY_TEXT,
-                        },
-                    },
-                    'Subject': {
-                        'Charset': CHARSET,
-                        'Data': SUBJECT,
-                    },
-                },
-                Source=SENDER,
+            #Provide the contents of the SMS.
+            sms_setup = sns.set_sms_attributes(
+                attributes={
+                    'DefaultSenderID': FRON_NAME
+                }
             )
+
+            response = sns.publish(
+                PhoneNumber=RECIPIENT,
+                Message=BODY_TEXT
+            )
+
         # Display an error if something goes wrong.
         except ClientError as e:
-            logger.info("Email wasn't sent correctly!")
+            logger.info("SMS wasn't sent correctly!")
             logger.error(e.response['Error']['Message'])
+            return False
         else:
-            logger.info("Email sent! Message ID:"),
+            logger.info("SMS sent! Message ID:"),
             logger.info(response['MessageId'])
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        logger.info("In SendNewEmailHandler")
+        logger.info("In SendNewSMSlHandler")
 
-        self.send_email(handler_input)
-        speech = EMAIL_SENT_MESSAGE
+        #TODO CHECK FOR RETURN
+        sms = self.send_sms(handler_input)
 
-        handler_input.response_builder.speak(speech).set_card(
-            SimpleCard(SKILL_NAME, handler_input.request_envelope.request.intent["slots"]["Email"]["bodyText"]))
-        return handler_input.response_builder.response
+        if not sms:
+            raise ValueError('Erorr sending SMS')
+        else:
+            speech = SMS_SENT_MESSAGE
+
+            handler_input.response_builder.speak(speech).set_card(
+                SimpleCard(SKILL_NAME, get_slot_value(handler_input=handler_input, slot_name="body")))
+            return handler_input.response_builder.response
 
 
 class HelpIntentHandler(AbstractRequestHandler):
@@ -200,8 +198,8 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
         logger.info("In CatchAllExceptionHandler")
         logger.error(exception, exc_info=True)
 
-        handler_input.response_builder.speak(EXCEPTION_MESSAGE).ask(
-            HELP_REPROMPT)
+        handler_input.response_builder.speak('%s (%s)' % (EXCEPTION_MESSAGE, exception)).ask(
+            '%s (%s)' % (HELP_REPROMPT, exception))
 
         return handler_input.response_builder.response
 
