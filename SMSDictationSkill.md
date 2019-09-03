@@ -64,7 +64,6 @@ Click ```Create function```, name your new function, select **Python 3.7** as yo
 Next stage is uploading your code (in zip file format) to the console. On the function edit page, navigate to the **Function code** section, change ```Code entry type``` to ```Upload a .zip file```. Browse for your latest version of your ```function.zip``` file and hit ```Save``` on the top right of the page.
 
 When the upload is done, you should see your code and tree structure of your .zip file in the WYSIWYG editor.
-To connect your lambda with your new code, you will need to make sure the function Handler and the file name and handler are the same.
 
 #### Add test event
 If you want to test your code without the need to interact with your skill each time you want to initiate a Lambda execution, you will have to define a test event for your function.
@@ -80,6 +79,7 @@ If all went well, you should see a similar output as the screenshot below:
 As you can see, although your code was executed successfully, There is an exception that was raised. Check the log output section to find out the reason for this exception.
 
 #### Setup Lambda IAM Role permissions
+# TODO
 As you saw in the previous section, the reason for our exception is insufficient permissions of our Lambda functions to access SNS.
 
 To fix that, we need to provide the role that was created during our function creation, the right permissions to access SNS.
