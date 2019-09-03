@@ -40,6 +40,8 @@ logger.setLevel(logging.DEBUG)
 # Amazon SNS client
 sns = boto3.client('sns')
 
+# Amazon Translate client
+translate = boto3.client('translate')
 
 # Built-in Intent Handlers
 class SendNewSMSHandler(AbstractRequestHandler):
@@ -55,10 +57,21 @@ class SendNewSMSHandler(AbstractRequestHandler):
 
             RECIPIENT = get_slot_value(handler_input=handler_input, slot_name="toPhone")
             BODY_TEXT = get_slot_value(handler_input=handler_input, slot_name="body")
-            FRON_NAME = [YOUR_CODE_IS_HERE]
-            TO_NAME = [YOUR_CODE_IS_HERE]
+            FRON_NAME = get_slot_value(handler_input=handler_input, slot_name="myName")
+            TO_NAME = get_slot_value(handler_input=handler_input, slot_name="toName")
             
             translate_slot = get_slot(handler_input=handler_input, slot_name="translate")
+
+            if translate_slot.resolutions.resolutions_per_authority[0].values:
+                DEST_LANG = translate_slot.resolutions.resolutions_per_authority[0].values[0].value.id
+                
+                logger.info("dest language is: {}".format(DEST_LANG))
+    
+                result = translate.translate_text(Text=BODY_TEXT, SourceLanguageCode='auto', TargetLanguageCode=DEST_LANG)
+                BODY_TEXT = result.get('TranslatedText')
+                
+                logger.info("after translate: ")
+                logger.info(BODY_TEXT)
 
             #Provide the contents of the SMS.
             sms_setup = sns.set_sms_attributes(
@@ -67,8 +80,10 @@ class SendNewSMSHandler(AbstractRequestHandler):
                 }
             )
 
-            #Publish the SMS
-            [YOUR_CODE_IS_HERE]
+            response = sns.publish(
+                PhoneNumber=RECIPIENT,
+                Message=BODY_TEXT
+            )
 
         # Display an error if something goes wrong.
         except ClientError as e:
