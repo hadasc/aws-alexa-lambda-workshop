@@ -51,7 +51,7 @@ To enable Alexa skills to perform actions, we need to integrate it with some kin
 ### Add your Lambda function integration
 This workshop includes the AWS Lambda code needed for your skill to perform SMS sending in the [```sendSMSSkillLambda```](./sendSMSSkillLambda) folder. Navigate to this folder and download the [```function.zip```](./sendSMSSkillLambda/function.zip) and [```lambda_function.py```](./sendSMSSkillLambda/lambda_function.py) files to your local machine.
 
-To make it a bit more interesting, we have omitted some of the  code from the Lambda function, so you will have to edit it a bit before you will be able to use it. Please review the code and replace all ```[YOUR_CODE_IS_HERE]``` sections with the right code.
+To make it a bit more interesting, we have omitted some of the  code from the Lambda function, so you will have to edit it a bit before you will be able to use it. Please review the code and replace all ```[YOUR_CODE_IS_HERE]``` sections with the right code. Need some help? Check [Boto 3 documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sns.html).
 
 Before uploading your code, please read and follow the steps in the Lambda function [```README.md```](./sendSMSSkillLambda/README.md) file.
 

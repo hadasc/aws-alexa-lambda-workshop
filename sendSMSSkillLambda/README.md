@@ -8,6 +8,6 @@ After editing your code you will need to perform two additional steps to include
 
    ```zip -g function.zip lambda_function.py```
 
-2. Upload function.zip package to the lambda service using AWS CLI (you can upload your code using the AWS Console as well). Use the following command: (don't forget to replace ***\<your-function-name\>***)
+2. **Optional - after creating initial function** Upload function.zip package to the lambda service using AWS CLI (you can upload your code using the AWS Console as well). Use the following command: (don't forget to replace ***\<your-function-name\>***)
 
    ```aws lambda update-function-code --function-name ***\<your-function-name\>*** --zip-file fileb://function.zip```

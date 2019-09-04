@@ -17,4 +17,4 @@ This is the only change you need to do on the Alexa Skill side. The rest of the 
 We would like you to create the lambda integration on your own by adding the needed code to your [```lambda_function.py```](./sendSMSSkillLambda/lambda_function.py).
 The basic idea is to use the [Boto 3 documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/translate.html) for Amazon Translate to add translation capabilities to your code.
 
-In case you run into issues, don't worry, we have a full working solution "hidden" in this git repository. You can find it here - [```lambda_function.py.orig```](./sendSMSSkillLambda/lambda_function.py.orig).
+In case you run into issues, don't worry, we have a full working solution "hidden" in this git repository. You can find it here - [```lambda_function.py.solution```](./sendSMSSkillLambda/lambda_function.py.solution).
