@@ -57,7 +57,7 @@ class SendNewSMSHandler(AbstractRequestHandler):
             BODY_TEXT = get_slot_value(handler_input=handler_input, slot_name="body")
             FRON_NAME = [YOUR_CODE_IS_HERE]
             TO_NAME = [YOUR_CODE_IS_HERE]
-            
+
             translate_slot = get_slot(handler_input=handler_input, slot_name="translate")
 
             #Provide the contents of the SMS.
