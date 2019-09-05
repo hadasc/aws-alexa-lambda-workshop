@@ -2,9 +2,9 @@
 
 This workshop includes the Lambda function needed to handle your skill request. The code requires some python dependencies to be included as part of your Lambda package. The dependencies are already packaged in the original function.zip.
 
-After editing your code you will need to perform two additional steps to include your updated code in the zip file (from the ```sendSMSSkillLambda``` folder):
+After editing your code you will need to pack your code in a zip file, to include your updated code in the zip file (from the ```sendSMSSkillLambda``` folder):
 
-1. Add the lambda function code to function.zip. Use the following command:
+1. To add changes in your lambda function code to ```function.zip```, Use the following command:
 
    ```zip -g function.zip lambda_function.py```
 

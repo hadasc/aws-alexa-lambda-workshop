@@ -15,6 +15,6 @@ This workshop has 3 parts:
 - Connect your skill to an AWS backend using AWS Lambda.
 
 [Part 3 - Add translation capabilities to your skill](AddTranslation.md)
-- Extend your skill to be able to translate your SMS based on the desired target language.
+- Extend your skill to be able to translate your SMS based on a selected target language.
 
-[Start Part 1 >>](BuildYourFirstSkill.md)
+Ready for some hands-on? [Let's Start Part 1 >>](BuildYourFirstSkill.md)

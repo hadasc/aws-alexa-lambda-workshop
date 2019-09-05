@@ -29,6 +29,7 @@ Our SMS skill will need several slots to send our message:
 Go and add the missing slots and define slot types, prompts and user utterances.
 
 At the end of the process you should have something like the next screenshot in your Intent Slots list:
+
 ![Intent Slots](screenshots/Screen5.png)
 
 The ```AMAZON.SearchQuery``` slot type is used for open text inputs in our skill.
@@ -41,7 +42,7 @@ Since we want to make sure Alexa got the right SMS details before sending it, we
 To do that, turn on ```Intent Confirmation``` and define a prompt, using the different slots that Alexa should say before sending out the SMS.
 
 ## Save, Build and Profile
-Save your model (if you did not already) and run your Build.
+Save your model (if you did not already) and run build it.
 
 Test your ```SendSMS``` intent and make sure you can perform a dialog with the skill until you get the Intent confirmation.
 
@@ -51,14 +52,29 @@ To enable Alexa skills to perform actions, we need to integrate it with some kin
 ### Add your Lambda function integration
 This workshop includes the AWS Lambda code needed for your skill to perform SMS sending in the [```sendSMSSkillLambda```](./sendSMSSkillLambda) folder. Navigate to this folder and download the [```function.zip```](./sendSMSSkillLambda/function.zip) and [```lambda_function.py```](./sendSMSSkillLambda/lambda_function.py) files to your local machine.
 
-To make it a bit more interesting, we have omitted some of the  code from the Lambda function, so you will have to edit it a bit before you will be able to use it. Please review the code and replace all ```[YOUR_CODE_IS_HERE]``` sections with the right code. Need some help? Check [Boto 3 documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sns.html).
+To make it a bit more interesting, we have omitted some of the  code from the Lambda function, so you will have to edit it a bit, before you will be able to use it. Please review the code and replace all ```[YOUR_CODE_IS_HERE]``` sections with the right code. Need some help? Check [Boto 3 documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sns.html) and [Alexa Developer Documentation](https://developer.amazon.com/documentation).
 
 Before uploading your code, please read and follow the steps in the Lambda function [```README.md```](./sendSMSSkillLambda/README.md) file.
 
 #### Upload Lambda code
 Open [AWS Management Console](https://console.aws.amazon.com/) and login to your account. Select a region (we recommend using Ireland/EU-WEST-1) and go to Services --> Lambda.
 
-Click ```Create function```, name your new function, select **Python 3.7** as your runtime and create a new execution role with basic Lambda permission (we will edit permission later on). When done, click ```Create function```
+Click ```Create function```, name your new function, select **Python 3.7** as your runtime.
+
+There are two approaches for your new Lambda execution role:
+<details>
+<summary>Using existing Role</summary>
+If you have a predefined role with the needed permissions to run your Lambda, you can select it to be used while executing your code.
+</details>
+<details>
+<summary>Creating a new Role</summary>
+If you don't have a predifened role, create a new execution role with basic Lambda permission (we will edit permission later on).
+
+</details>
+<br />
+
+When done, click ```Create function```
+
 ![New Function](screenshots/Screen6.png)
 
 Next stage is uploading your code (in zip file format) to the console. On the function edit page, navigate to the **Function code** section, change ```Code entry type``` to ```Upload a .zip file```. Browse for your latest version of your ```function.zip``` file and hit ```Save``` on the top right of the page.
@@ -76,10 +92,9 @@ After creating the test event, next time when you hit the test button, it will e
 You will see the results of your execution at the top of the page. You can look at the result returned by your function execution at the top of the window and full log at the bottom.
 If all went well, you should see a similar output as the screenshot below:
 ![Execution](screenshots/Screen8.png)
-As you can see, although your code was executed successfully, There is an exception that was raised. Check the log output section to find out the reason for this exception.
+If you created a new role or don't have the right permissions in your existing roles, you will see an error, although your code was executed successfully. Looking at the logs, you will find that there is an exception that was raised. Check the log output section to find out the reason for this exception.
 
 #### Setup Lambda IAM Role permissions
-# TODO
 As you saw in the previous section, the reason for our exception is insufficient permissions of our Lambda functions to access SNS.
 
 To fix that, we need to provide the role that was created during our function creation, the right permissions to access SNS.
