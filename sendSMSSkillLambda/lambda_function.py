@@ -20,7 +20,7 @@ from ask_sdk_model import Response
 # Alexa messages
 # =========================================================================================================================================
 SKILL_NAME = "SMS Sender"
-SMS_SENT_MESSAGE = "Your SMS was sent sucessfully!"
+SMS_SENT_MESSAGE = "Your SMS was sent successfully!"
 HELP_MESSAGE = "You can say alexa can you send SMS for me, or, you can say exit... What can I help you with?"
 HELP_REPROMPT = "What can I help you with?"
 STOP_MESSAGE = "Goodbye!"

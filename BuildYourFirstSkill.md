@@ -44,7 +44,7 @@ Slots are variables your skill needs to store data and perform actions. Each int
 
 For now, we would like to store your name in one of our slots (we will use it later on). Create a new slot with the name ```myName```, click the ```+``` sign to add it and define the slot type as ```AMAZON.FirstName```. A slot type defines how data in the slot is recognized and handled, such as a list of possible values to expect in the slot.
 
-To add additional properties to the slot, click on ```Edit Dialod``` next to the slot. On this screen, you can set properties, such as validation, and define required slots. In our case, this slot is required so we should turn on ```Slot Filling``` and define speech prompts that will be used by Alexa to ask the user to fill the slot. You can use multiple prompts. Don't forget to click the ```+``` sign to add it.
+To add additional properties to the slot, click on ```Edit Dialog``` next to the slot. On this screen, you can set properties, such as validation, and define required slots. In our case, this slot is required so we should turn on ```Slot Filling``` and define speech prompts that will be used by Alexa to ask the user to fill the slot. You can use multiple prompts. Don't forget to click the ```+``` sign to add it.
 
 In addition, you should add ```user utterances``` that let Alexa know what might a user say as a response to the slot filling question. Those utterances should include the slot in curly brackets {}.
 

@@ -20,8 +20,8 @@ from ask_sdk_model import Response
 # Alexa messages
 # =========================================================================================================================================
 SKILL_NAME = "SMS Sender"
-SMS_SENT_MESSAGE = "Your SMS was sent sucessfully!"
-HELP_MESSAGE = "You can say alexa can you send SMS for me, or, you can say exit... What can I help you with?"
+SMS_SENT_MESSAGE = "Your SMS was sent successfully!"
+HELP_MESSAGE = "You can say Alexa can you send SMS for me, or, you can say exit... What can I help you with?"
 HELP_REPROMPT = "What can I help you with?"
 STOP_MESSAGE = "Goodbye!"
 FALLBACK_MESSAGE = "I'm sorry, I can't help you with that.  I can send SMS for you. What can I help you with?"
@@ -59,17 +59,17 @@ class SendNewSMSHandler(AbstractRequestHandler):
             BODY_TEXT = get_slot_value(handler_input=handler_input, slot_name="body")
             FRON_NAME = get_slot_value(handler_input=handler_input, slot_name="myName")
             TO_NAME = get_slot_value(handler_input=handler_input, slot_name="toName")
-            
+
             translate_slot = get_slot(handler_input=handler_input, slot_name="translate")
 
             if translate_slot.resolutions.resolutions_per_authority[0].values:
                 DEST_LANG = translate_slot.resolutions.resolutions_per_authority[0].values[0].value.id
-                
+
                 logger.info("dest language is: {}".format(DEST_LANG))
-    
+
                 result = translate.translate_text(Text=BODY_TEXT, SourceLanguageCode='auto', TargetLanguageCode=DEST_LANG)
                 BODY_TEXT = result.get('TranslatedText')
-                
+
                 logger.info("after translate: ")
                 logger.info(BODY_TEXT)
 
