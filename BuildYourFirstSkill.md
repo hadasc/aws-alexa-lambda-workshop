@@ -58,7 +58,7 @@ Save your model (if you haven't already) and run your first Build.
 
 The Build process will take all your skill definitions and create the needed components to run it, including training of the NLP model needed for your skill.
 
-When the build is done, you should be able to test your intents using the ```Utterances Profiler``` button at the top right of your screen.
+When the build is done, you should be able to test your intents using the ```Evaluate Model``` button at the top right of your screen.
 
 Test your name intent and make sure you can perform a dialog with the skill, that will eventually save your name in the ```myName``` slot.
 
