@@ -55,8 +55,8 @@ class SendNewSMSHandler(AbstractRequestHandler):
 
             RECIPIENT = get_slot_value(handler_input=handler_input, slot_name="toPhone")
             BODY_TEXT = get_slot_value(handler_input=handler_input, slot_name="body")
-            FRON_NAME = [YOUR_CODE_IS_HERE]
-            TO_NAME = [YOUR_CODE_IS_HERE]
+            FRON_NAME = get_slot_value(handler_input=handler_input, slot_name="myName")
+            TO_NAME = get_slot_value(handler_input=handler_input, slot_name="toName")
 
             translate_slot = get_slot(handler_input=handler_input, slot_name="translate")
 
@@ -68,7 +68,18 @@ class SendNewSMSHandler(AbstractRequestHandler):
             )
 
             #Publish the SMS
-            [YOUR_CODE_IS_HERE]
+       response = sns.publish(
+    PhoneNumber=RECIPIENT,
+    Message=body,
+    Subject="winning sms",
+    MessageAttributes={
+        'string': {
+            'DataType': 'string',
+            'StringValue': 'string',
+            'BinaryValue': b'bytes'
+        }
+    }
+)
 
         # Display an error if something goes wrong.
         except ClientError as e:
